@@ -11,11 +11,11 @@ import javax.sql.DataSource;
 public class GuestDaoImpl implements GuestDao {
 	private DataSource dataSource;
 	public GuestDaoImpl() throws Exception {
-		System.out.println("###GuestDaoImpl(): 기본생성자 호출");
+		//System.out.println("###GuestDaoImpl(): 기본생성자 호출");
 	}
 	
 	public void setDataSource(DataSource dataSource) {
-		System.out.println("###setDataSource("+dataSource+"): 메소드 호출");
+		//System.out.println("###setDataSource("+dataSource+"): 메소드 호출");
 		this.dataSource = dataSource;
 	}
 

@@ -1,21 +1,32 @@
 package com.itwill.guest.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
 
 import com.itwill.guest.Guest;
 import com.itwill.guest.GuestServiceImpl;
 import com.itwill.guest.GuestService;
-import com.itwill.summer.Controller;
+
 
 public class GuestWriteActionController implements Controller {
+	private GuestService guestService;
+	
+	public void setGuestService(GuestService guestService) {
+		this.guestService = guestService;
+	}
 
 	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		/********************guest_write_action.do******************/
+		ModelAndView mv =new ModelAndView();
 		String forwardPath="";
 		if(request.getMethod().equalsIgnoreCase("GET")) {
 			forwardPath = "redirect:guest_main.do";
+			mv.setViewName(forwardPath);
 		}else {
 			String guest_name = request.getParameter("guest_name");
 			String guest_email = request.getParameter("guest_email");
@@ -23,16 +34,17 @@ public class GuestWriteActionController implements Controller {
 			String guest_title = request.getParameter("guest_title");
 			String guest_content = request.getParameter("guest_content");
 			try {
-				GuestService guestService = new GuestServiceImpl();
 				int insertRowCount = guestService
 						.insertGuest(new Guest(0, guest_name, "", guest_email, guest_homepage, guest_title, guest_content));
 				forwardPath="redirect:guest_list.do";
+				mv.setViewName(forwardPath);
 			}catch (Exception e) {
 				forwardPath="forward:/WEB-INF/views/guest_error.jsp";
+				mv.setViewName(forwardPath);
 				e.printStackTrace();
 			}
 		}
-		return forwardPath;
+		return mv;
 	}
 
 }

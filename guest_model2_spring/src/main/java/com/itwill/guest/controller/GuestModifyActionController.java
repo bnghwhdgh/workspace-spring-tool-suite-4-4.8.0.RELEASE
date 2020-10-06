@@ -1,18 +1,28 @@
 package com.itwill.guest.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
 
 import com.itwill.guest.Guest;
 import com.itwill.guest.GuestServiceImpl;
 import com.itwill.guest.GuestService;
-import com.itwill.summer.Controller;
 
-public class GuestModifyActionController implements Controller {
+
+public class GuestModifyActionController implements  Controller{
+	private GuestService guestService;
+	public void setGuestService(GuestService guestService) {
+		this.guestService = guestService;
+	}
+
 
 	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		String forwardPath="";
+		ModelAndView mv = new ModelAndView();
 		/******************guest_modify_action.do******************/
 		if(request.getMethod().equalsIgnoreCase("GET")){
 			forwardPath="redirect:guest_main.do";
@@ -25,7 +35,7 @@ public class GuestModifyActionController implements Controller {
 				String guest_homepage=request.getParameter("guest_homepage");
 				String guest_title=request.getParameter("guest_title");
 				String guest_content=request.getParameter("guest_content");
-				GuestService guestService=new GuestServiceImpl();
+				
 				int updateRowCount=
 						guestService.updateGuest(
 									new Guest(Integer.parseInt(guest_noStr),
@@ -33,13 +43,15 @@ public class GuestModifyActionController implements Controller {
 										guest_email,guest_homepage,
 										guest_title,guest_content));
 				forwardPath="redirect:guest_view.do?guest_no="+guest_noStr;
+				mv.setViewName(forwardPath);
 				//forwardPath="forward:guest_view.do";
 			}catch(Exception e){
 				e.printStackTrace();
 				forwardPath="forward:/WEB-INF/views/guest_error.jsp";
+				mv.setViewName(forwardPath);
 			}
 		}
-		return forwardPath;
+		return mv;
 	}
 
 }

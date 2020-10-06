@@ -17,12 +17,12 @@ import com.itwill.guest.GuestService;
 public class GuestListController implements Controller{
 	private GuestService guestService;
 	public GuestListController() {
-		System.out.println("GuestListController() 기본생성자");
+		//System.out.println("GuestListController() 기본생성자");
 	}
 	
 	public void setGuestService(GuestService guestService) {
 		this.guestService = guestService;
-		System.out.println("GuestListController: setGuestService("+guestService+") 메소드 호출");
+		//System.out.println("GuestListController: setGuestService("+guestService+") 메소드 호출");
 	}
 
 	public ModelAndView handleRequest(HttpServletRequest request,

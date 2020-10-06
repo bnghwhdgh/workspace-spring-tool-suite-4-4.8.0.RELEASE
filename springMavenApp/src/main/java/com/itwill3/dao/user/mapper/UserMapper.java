@@ -2,9 +2,12 @@ package com.itwill3.dao.user.mapper;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
-import com.itwill.user.User;
+import com.itwill3.dao.user.User;
+
+
 
 public interface UserMapper {
 	/*

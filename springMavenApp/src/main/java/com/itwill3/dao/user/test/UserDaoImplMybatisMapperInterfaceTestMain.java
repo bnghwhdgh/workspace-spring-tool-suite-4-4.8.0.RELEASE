@@ -12,7 +12,8 @@ public class UserDaoImplMybatisMapperInterfaceTestMain {
 		ApplicationContext applicationContext = 
 				new ClassPathXmlApplicationContext("com/itwill3/dao/user/user-dao-mybatis-mapper-interface.xml");
 		UserDao userDao=(UserDao)applicationContext.getBean(UserDao.class);
-		System.out.println("### "+userDao.findUserList());
+		//System.out.println("### "+userDao.findUserList());
+		System.out.println("###"+userDao.findUser("abcd"));
 	}
 
 }
