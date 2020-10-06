@@ -1,9 +1,8 @@
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@page import="com.itwill.guest.Guest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-
 	/*
 	0. GET방식이면 guest_write_form.jsp redirection
 	
@@ -28,19 +27,18 @@
 		String guest_title=request.getParameter("guest_title");
 		String guest_content=request.getParameter("guest_content");
 		Guest guest=
-				new Guest(-999,guest_name,
-						  null,guest_email,
-						  guest_homepage,guest_title,
-						  guest_content);
-		GuestService guestService=new GuestService();
+		new Guest(-999,guest_name,
+				  null,guest_email,
+				  guest_homepage,guest_title,
+				  guest_content);
+		GuestServiceImpl guestService=new GuestServiceImpl();
 		int insertRowCount=
-				guestService.insertGuest(guest);
+		guestService.insertGuest(guest);
 		response.sendRedirect("guest_list.jsp");
 	}catch(Exception e){
 		e.printStackTrace();
 		response.sendRedirect("guest_error.jsp");
 	}
-	
 %>
 
 

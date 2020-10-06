@@ -1,15 +1,15 @@
 <%@page import="com.itwill.guest.Guest"%>
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%
-String no = request.getParameter("guest_no");
+	String no = request.getParameter("guest_no");
 if(no==null||no==""){
 	response.sendRedirect("guest_list.jsp");
 	return;
 }
-GuestService gus = new GuestService();
+GuestServiceImpl gus = new GuestServiceImpl();
 Guest guest = gus.selectByNo(Integer.parseInt(no));
 
 if(guest==null){

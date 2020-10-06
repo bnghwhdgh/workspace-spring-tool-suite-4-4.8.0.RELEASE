@@ -27,44 +27,49 @@ public class GuestDaoImplMyBatisMapperInterface implements GuestDao {
 	@Override
 	public int insertGuest(Guest guest) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		int insertRow = sqlSession.insert(NAMESPACE+"insertGuest",guest);
+		GuestMapper guestMapper = sqlSession.getMapper(GuestMapper.class);
+		int insertRowCount =guestMapper.insertGuest(guest);
 		sqlSession.commit();
 		sqlSession.close();
-		return insertRow;
+		return insertRowCount;
 	}
 
 	@Override
 	public Guest selectByNo(int no) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		sqlSession.commit();
+		GuestMapper guestMapper = sqlSession.getMapper(GuestMapper.class);
+		Guest findGuest = guestMapper.selectByNo(no);
 		sqlSession.close();
-		return  sqlSessionFactory.openSession().getMapper(GuestMapper.class).selectByNo(no);
+		return  findGuest;
 	}
 
 	@Override
 	public ArrayList<Guest> selectAll() throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		GuestMapper guestMapper=sqlSession.getMapper(GuestMapper.class);
-		
-		sqlSession.commit();
+		ArrayList<Guest> guestList = (ArrayList<Guest>)guestMapper.selectAll();
 		sqlSession.close();
-		return null;
+		return guestList;
 	}
 
 	@Override
 	public int updateGuest(Guest guest) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
+		GuestMapper guestMapper = sqlSession.getMapper(GuestMapper.class);
+		int updateRowCount = guestMapper.updateGuest(guest);
 		sqlSession.commit();
 		sqlSession.close();
-		return 0;
+		return updateRowCount;
 	}
 
 	@Override
 	public int deleteGuest(int no) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
-		return 0;
+		GuestMapper guestMapper = sqlSession.getMapper(GuestMapper.class);
+		int deleteRowCount = guestMapper.deleteGuest(no);
+		sqlSession.commit();
+		sqlSession.close();
+		return deleteRowCount;
 	}
 
 }

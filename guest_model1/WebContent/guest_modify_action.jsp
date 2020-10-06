@@ -1,5 +1,5 @@
 <%@page import="com.itwill.guest.Guest"%>
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -21,7 +21,7 @@
 		String homepage = request.getParameter("guest_homepage");
 		String title = request.getParameter("guest_title");
 		String content = request.getParameter("guest_content");
-		GuestService guestSer = new GuestService();
+		GuestServiceImpl guestSer = new GuestServiceImpl();
 		Guest guest = new Guest(Integer.parseInt(no), name, null, email, homepage, title, content);
 		int updateRow = guestSer.updateGuest(guest);
 		response.sendRedirect("guest_view.jsp?guest_no=" + no);

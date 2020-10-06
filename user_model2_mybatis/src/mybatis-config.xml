@@ -31,7 +31,8 @@
 		
 	</environments>
 	<mappers>
-		<mapper resource="com/itwill/user/mapper/UserMapper.xml"/>
+		<!-- <mapper resource="com/itwill/user/mapper/UserMapper.xml"/> -->
+		<mapper class="com.itwill.user.mapper.UserMapper"/>
 	</mappers>
 </configuration>
 

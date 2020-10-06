@@ -1,13 +1,13 @@
 <%@page import="com.itwill.guest.Guest"%>
-<%@page import="com.itwill.guest.GuestService"%>
+<%@page import="com.itwill.guest.GuestServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-if(request.getMethod().equalsIgnoreCase("GET")){
+	if(request.getMethod().equalsIgnoreCase("GET")){
 	response.sendRedirect("guest_main.jsp");
 }
 String no = request.getParameter("guest_no");
-GuestService guestSer = new GuestService();
+GuestServiceImpl guestSer = new GuestServiceImpl();
 Guest guest = guestSer.selectByNo(Integer.parseInt(no));
 %>
 

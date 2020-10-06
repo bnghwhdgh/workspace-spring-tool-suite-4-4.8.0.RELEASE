@@ -11,9 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.mybatis3.dao.mapper.StudentMapper;
 import com.mybatis3.domain.Student;
 
-public class MapperInterfaceStudentDao {
+public class MapperInterfaceStudentDao  implements StudentMapper{
 	private SqlSessionFactory sqlSessionFactory;
-	public static final String NAMESPACE="com.mybatis3.dao.mapper.StudentMapper.";
+	//public static final String NAMESPACE="com.mybatis3.dao.mapper.StudentMapper.";
 	public MapperInterfaceStudentDao(){
 		try {
 			InputStream mybatisConfigInputStream = 
@@ -29,9 +29,6 @@ public class MapperInterfaceStudentDao {
 		StudentMapper studentMapper = sqlSessionFactory.openSession().getMapper(StudentMapper.class);
 		return studentMapper.findAllStudents();
 	}
-	
-	
-	
 	
 	public Student findStudentById(Integer studId) {
 		SqlSession  sqlSession = sqlSessionFactory.openSession();
@@ -50,6 +47,16 @@ public class MapperInterfaceStudentDao {
 		sqlSession.close();
 		*/
 		return findStudent;
+	}
+
+	@Override
+	public int insertStudentBySequence2(Student student) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+		int insertRowCount = studentMapper.insertStudentBySequence2(student);
+		sqlSession.commit();
+		sqlSession.close();
+		return insertRowCount;
 	}
 	
 }

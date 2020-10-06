@@ -12,6 +12,9 @@ public class StudentMapperProxy implements StudentMapper{
 	@Override
 	public Student findStudentById(Integer studId) {
 		String namespace =StudentMapper.class.getName();
+		System.out.println(StudentMapper.class);
+		System.out.println("--------");
+		System.out.println(namespace);
 		Student findStudent=
 				sqlSession
 				.selectOne(namespace+"findStudentById",
@@ -27,6 +30,11 @@ public class StudentMapperProxy implements StudentMapper{
 		sqlSession.commit();
 		sqlSession.close();
 		return studentList;
+	}
+	@Override
+	public int insertStudentBySequence2(Student student) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

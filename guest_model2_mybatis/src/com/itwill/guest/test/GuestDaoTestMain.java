@@ -1,13 +1,16 @@
 package com.itwill.guest.test;
 
+import java.util.ArrayList;
+
 import com.itwill.guest.Guest;
 import com.itwill.guest.GuestDao;
 import com.itwill.guest.GuestDaoImplMyBatis;
+import com.itwill.guest.GuestDaoImplMyBatisMapperInterface;
 
 public class GuestDaoTestMain {
 
 	public static void main(String[] args)throws Exception {
-		GuestDao guestDao=new GuestDaoImplMyBatis();
+//		GuestDao guestDao=new GuestDaoImplMyBatis();
 //		System.out.println(guestDao.selectAll());
 //		System.out.println("1.insert");
 //		System.out.println(guestDao
@@ -32,8 +35,29 @@ public class GuestDaoTestMain {
 //		Guest guest = guestDao.selectByNo(1);
 //		guest.setGuest_content("호로롤ㄹ로롤로롤");
 //		System.out.println(guestDao.updateGuest(guest));
-		
+		System.out.println("----------------------------------------------------------------------------");
 //		System.out.println("지운당:"+guestDao.deleteGuest(4));
+		GuestDao guestDao = new GuestDaoImplMyBatisMapperInterface();
+		//1. selectById 확인
+		//Guest guest = guestDao.selectByNo(5);
+		//System.out.println(guest);
+		//2. selectAll 확인
+		ArrayList<Guest> findList = guestDao.selectAll();
+		System.out.println(findList);
+		//3. insertGuest 확인
+//		Guest insertGuest = new Guest(-9000,"김추석",null,"cu@gmail.com","http://","믱믱","으앙 오후 5시당 으히히히");
+//		int insert = guestDao.insertGuest(insertGuest);
+//		System.out.println("추가되면 1이 출력되지렁: "+insert);
+		//4.update 확인
+//		Guest findGuest = guestDao.selectByNo(21);
+//		System.out.println(findGuest);
+//		findGuest.setGuest_content("냉장고를 열어봐라 고추참치 꺼내먹어라~~~~~");
+//		int update =guestDao.updateGuest(findGuest);
+//		System.out.println("업뎃되면 1이 출력되지렁:" + update);
+		//5. delete 확인
+//		int delete = guestDao.deleteGuest(21);
+//		System.out.println("삭제되면 1이 출력되지렁: "+delete);
+		
 	}	
 
 }

@@ -13,7 +13,7 @@
 		  <property name="url" value="jdbc:oracle:thin:@182.237.126.19:1521:XE"></property>
 		  <property name="username" value="javapython77"></property>
 		  <property name="password" value="javapython77"></property>
-		  </bean>
+	</bean>
 	
 	<!-- spring DataSource [value는 EL처럼 작성해주자]-->
 	<bean id="springDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

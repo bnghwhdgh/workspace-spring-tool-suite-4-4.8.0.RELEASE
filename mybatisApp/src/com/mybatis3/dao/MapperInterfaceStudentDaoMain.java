@@ -10,6 +10,7 @@ public class MapperInterfaceStudentDaoMain {
 		//System.out.println("###"+studentDao.findStudentById(1));
 		System.out.println("###"+studentDao.findAllStudents());
 		System.out.println("------------StudentMapper Interface를 사용한호출-----------");
+		
 	}
 
 }

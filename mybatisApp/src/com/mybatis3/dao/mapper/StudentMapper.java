@@ -30,4 +30,16 @@ public interface StudentMapper {
 			from students
 		</select>
 	 */
+	
+	/*
+	 * <insert id="insertStudentBySequence2" 
+			parameterType="com.mybatis3.domain.Student">
+		<selectKey order="BEFORE" keyProperty="studId" resultType="int">
+			select STUDENTS_STUD_ID_SEQ.nextval from dual
+		</selectKey>
+		insert into students(stud_id,name,email,dob)
+		values (#{studId},#{name},#{email},#{dob})	
+	</insert>
+	 */
+	public int insertStudentBySequence2(Student student);
 }
