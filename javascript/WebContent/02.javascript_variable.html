@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+	 * 변수,상수,리터럴
+	 */
+	//let a1='test1';
+	//전역객체 window에 속한 전역변수이다.
+	var a2='test2';
+	var b=123;
+	var c=123.4;
+	var d= true;
+	var a1='test11';
+	//let a1 = 'test1';
+	//Uncaught SyntaxError: Identifier 'a1' has already been declared
+	e='김태희';
+	var e; //같은 scope내에서는 변수를 어디에서든 생성해도 된다.(호이스팅)
+	console.log('e-->'+e);
+	/*
+	상수
+	*/
+	//const f;
+	//Uncaught SyntaxError: Missing initializer in const declaration
+	const f = 'KIM';
+	
+	var g;//undefined 라는 값이 들어감
+	
+	var h = null;
+	
+	/**************Array객체***************/
+	/*
+		1. Array객체 생성
+			A) JavaScript Object Notation[ JSON ]
+			ex) [ , ] , : , { , } , ,
+	*/
+	var nameArray = ['KIM','LEE','PARK','CHOI','SIM'];
+	var scoreArray = [77,88,98,45,60];
+	console.log(nameArray[0]);
+	console.log(scoreArray[0]);
+	for (var i = 0; i < nameArray.length; i++) {
+		console.log(nameArray[i]+'---->'+scoreArray[i]);
+	}
+	console.log('window.i---->'+window.i);
+	//자바에서 for문에 쓰이는 변수는 for문에서만 쓰이고 끝나지만 var i는 window 전역변수에 선언 되기 때문에 i를 또 쓰면 에러가 난다.
+	console.log('-------------------------------------------------');
+	console.log(window.a1);
+	console.log(typeof window.a1);
+	console.log(b);
+	console.log(typeof b);
+	if(typeof b=='number'){
+		console.log('b는 number입니다.');
+	}
+	if(typeof g=='undefined'){
+		console.log('g는 undefined입니다.');
+	}
+	if(typeof g==undefined){
+		console.log('g는 undefined 타입입니다.');
+	}
+	console.log(typeof h); // h의 타입은 object이다 .
+	if(h==null){
+		console.log('h는 null입니다.');
+	}
+</script>
+</head>
+<body>
+
+</body>
+</html>

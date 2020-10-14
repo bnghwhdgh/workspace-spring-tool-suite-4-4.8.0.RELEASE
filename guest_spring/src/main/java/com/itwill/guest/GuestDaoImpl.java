@@ -1,53 +1,63 @@
 package com.itwill.guest;
 
+import java.io.InputStream;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 public class GuestDaoImpl implements GuestDao {
-	private DataSource dataSource;
+	@Autowired
+	private SqlSessionFactory sqlSessionFactory;
+	private SqlSession sqlSession;
+	private static final String NAMESPACE = "com.itwill.guest.mapper.GuestMapper.";
+	
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+		this.sqlSessionFactory = sqlSessionFactory;
+	}
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+
+	
 	public GuestDaoImpl() throws Exception {
-		System.out.println("### GuestDaoImpl :기본생성자호출 ");
+		
 	}
 	
 
-	public void setDataSource(DataSource dataSource) {
-		System.out.println("### GuestDaoImpl : setDataSource("+dataSource+") 메쏘드호출 ");
-		this.dataSource = dataSource;
-	}
+//	public void setDataSource(DataSource dataSource) {
+//		System.out.println("### GuestDaoImpl : setDataSource("+dataSource+") 메쏘드호출 ");
+//		this.dataSource = dataSource;
+//	}
 
 
 	@Override
 	public int insertGuest(Guest guest) throws Exception {
-		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_INSERT);
-		pstmt.setString(1, guest.getGuest_name());
-		pstmt.setString(2, guest.getGuest_email());
-		pstmt.setString(3, guest.getGuest_homepage());
-		pstmt.setString(4, guest.getGuest_title());
-		pstmt.setString(5, guest.getGuest_content());
-		int insertRowCount = pstmt.executeUpdate();
-		con.close();
+		sqlSession = sqlSessionFactory.openSession();
+		int insertRowCount = sqlSession.insert(NAMESPACE+"insertGuest",guest);
+		sqlSession.commit();
+		sqlSession.close();
 		return insertRowCount;
 	}
 
 	@Override
 	public Guest selectByNo(int no) throws Exception {
 		Guest guest = null;
-		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_NO);
-		pstmt.setInt(1, no);
-		ResultSet rs = pstmt.executeQuery();
-		if (rs.next()) {
-			guest = new Guest(rs.getInt("guest_no"), rs.getString("guest_name"), rs.getString("guest_date"),
-					rs.getString("guest_email"), rs.getString("guest_homepage"), rs.getString("guest_title"),
-					rs.getString("guest_content"));
-
-		}
+		sqlSession=sqlSessionFactory.openSession();
+		guest=sqlSession.selectOne(NAMESPACE+"selectByNo", no);
+		sqlSession.close();
 		return guest;
 	}
 
@@ -59,40 +69,25 @@ public class GuestDaoImpl implements GuestDao {
 	 */
 	@Override
 	public ArrayList<Guest> selectAll() throws Exception {
-		ArrayList<Guest> guestList = new ArrayList<Guest>();
-
-		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_ALL);
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next()) {
-			guestList.add(new Guest(rs.getInt("guest_no"), rs.getString("guest_name"), rs.getString("guest_date"),
-					rs.getString("guest_email"), rs.getString("guest_homepage"), rs.getString("guest_title"),
-					rs.getString("guest_content")));
-		}
-		return guestList;
+		sqlSession = sqlSessionFactory.openSession();
+		List<Guest>guestList = sqlSession.selectList(NAMESPACE+"selectAll");
+		sqlSession.close();
+		return (ArrayList<Guest>)guestList;
 	}
 
 	@Override
 	public int updateGuest(Guest guest) throws Exception {
-		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_UPDATE);
-		pstmt.setString(1, guest.getGuest_name());
-		pstmt.setString(2, guest.getGuest_email());
-		pstmt.setString(3, guest.getGuest_homepage());
-		pstmt.setString(4, guest.getGuest_title());
-		pstmt.setString(5, guest.getGuest_content());
-		pstmt.setInt(6, guest.getGuest_no());
-		int updateRowCount = pstmt.executeUpdate();
-		con.close();
+		sqlSession = sqlSessionFactory.openSession();
+		int updateRowCount = sqlSession.update(NAMESPACE+"updateGuest", guest);
+		sqlSession.commit();
+		sqlSession.close();
 		return updateRowCount;
 	}
 
 	@Override
 	public int deleteGuest(int no) throws Exception {
-		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_DELETE);
-		pstmt.setInt(1, no);
-		int deleteRowCount = pstmt.executeUpdate();
+		sqlSession = sqlSessionFactory.openSession();
+		int deleteRowCount = sqlSession.delete(NAMESPACE+"deleteGuest", no);
 		return deleteRowCount;
 	}
 }

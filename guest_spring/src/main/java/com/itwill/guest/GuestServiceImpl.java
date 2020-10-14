@@ -2,7 +2,10 @@ package com.itwill.guest;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class GuestServiceImpl implements GuestService {
+	@Autowired
 	private GuestDao guestDao;
 	public GuestServiceImpl() throws Exception {
 		System.out.println("### GuestServiceImpl:기본생성자호출");

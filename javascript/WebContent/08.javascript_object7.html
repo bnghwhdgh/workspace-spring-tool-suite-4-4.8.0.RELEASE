@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="Student.js"></script>
+<script type="text/javascript">
+	/*
+	생성자함수 
+	 */
+	//코어객체
+	var object = new Object();
+	var strObject = new String("문자열");
+	var numObject = new Number(34);
+	var arrayObject = new Array();
+	//커스텀객체
+	//var studentObject=new Student();
+
+	/*********************학생객체**********************/
+
+	var studentArray = [ new com.itwill.Student('aaa','에이님',34,56,78), 
+						 new com.itwill.Student('bbb','비님',78,90,56), 
+						 new com.itwill.Student('ccc','씨님',75,43,65) ];
+</script>
+</head>
+<body>
+	<h1>자바스크립트 생성자함수4[package]</h1>
+	<hr>
+	<script type="text/javascript">
+		document.write('------------------studentList--------------------<br>')
+		
+		for (var i = 0; i < studentArray.length; i++) {
+			studentArray[i].calculateTot();
+			studentArray[i].calculateAvg();
+			document.write(studentArray[i].toString() + "<br>");
+		}
+		
+	</script>
+
+
+
+
+</body>
+</html>

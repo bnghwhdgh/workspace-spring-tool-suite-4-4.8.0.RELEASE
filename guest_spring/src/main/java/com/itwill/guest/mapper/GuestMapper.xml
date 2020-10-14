@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.guest.mapper.GuestMapper">
+	<select id="selectAll" resultType="com.itwill.guest.Guest">
+	select guest_no, guest_name, guest_date, guest_email, 
+	guest_homepage, guest_title, guest_content
+	from guest
+	</select>
+
+</mapper>
