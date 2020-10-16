@@ -11,7 +11,8 @@
 </style>
 <script type="text/javascript">
 	function eventPropagationCancle(event){
-	
+		alert(event.target); //target => <p></p> 이다
+		event.stopPropagation(); // 버블링 끊기
 	}
 </script>
 </head>
@@ -19,7 +20,7 @@
 	<div onclick="alert('outer div');">
 		<div onclick="alert('inner div');">
 			<h1 onclick="alert('h1');">
-				
+				<p onclick="eventPropagationCancle(event)">java script event bubling</p>
 			</h1>
 		</div>
 	</div>

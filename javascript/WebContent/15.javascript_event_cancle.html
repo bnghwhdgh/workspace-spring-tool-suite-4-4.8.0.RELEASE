@@ -4,10 +4,31 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+	//이벤트 자체를 날려버리는거
 	window.onload=function(){
 		//event등록
+		document.getElementById('tweet').addEventListener('click',function(){
+			alert('tweet 상세보기');
+		},false);
+		document.getElementById('imageSpan').addEventListener('click',function(e){
+			alert('tweet 사용자프로필');
+			e.stopPropagation();
+		},false);
 		
-		
+		document.getElementById('maina').addEventListener('click', function(e) {
+			//alert('maina click!!!');
+			//alert('href-->'+e.target.href);
+			//main.jsp 페이지 요청 행위를 못하게 함
+			e.preventDefault();
+			/*
+			AJAX 요청으로 서버에서 데이터(JSON)만 받아와서 DOM Tree 갱신
+			*/
+		}, false);
+		document.getElementById("f").addEventListener('submit', function(e) {
+			alert('submit event!! 회원가입 ajax요청: '+e.target.acion); //target=>form
+			//원래 submit행위를 못하게 함 (GET,POST방식으로 action으로 요청)
+			e.preventDefault();
+		}, false)
 	};
 </script>
 </head>
@@ -22,8 +43,8 @@
 		</div>
 	</div>
 <h2>디폴트 이벤트 취소[e.preventDefault()]</h2>
-1.anchor tag:<a id="mainp" href='main.jsp'>메인페이지요청</a><br/>
-2.anchor tag:<a id="maina" href='main.jsp'>AJAX요청</a><br/>
+1.anchor tag:<a id="mainp" href='main.jsp'>메인페이지요청[페이지요청]</a><br/>
+2.anchor tag:<a id="maina" href='main.jsp'>메인페이지요청[AJAX요청]</a><br/>
 <br/>
 <form id="f" name="f" action="join.jsp" method="get">
 	아이디:<input type='text' name="id"><br/>

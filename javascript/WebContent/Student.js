@@ -1,10 +1,7 @@
 /**
  * 
  */
-/*
-	학생객체를 생성해주는 << 생성자 함수 >> 라이브러리 사용
-	 */
-	var com=new Object();
+var com=new Object();
 	com.itwill = new Object();
 	/*
 	var com={};
@@ -17,8 +14,9 @@
 		this.eng=eng;
 		this.math=math;
 		this.tot=0;
-		this.avg=0;
+		this.avg=0.0;
 	};
+	
 	/**********prototype***************
 	com.itwill.Student.prototype.calculateTot=function(){
 		this.tot=this.kor+this.eng+this.math;

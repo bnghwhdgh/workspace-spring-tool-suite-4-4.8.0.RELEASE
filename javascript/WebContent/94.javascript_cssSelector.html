@@ -12,6 +12,24 @@ div, span {
 	margin: 10px;
 	background-color: #EEEEEE;
 }
+
+body > div{ 
+	border: 1px dotted orange;
+}
+
+body div{
+	background-color: yellow;
+
+}
+/*
+body > span{
+	border: 3px double tomato;
+}
+body span{
+	background-color:pink;
+}
+*/
+#themecast > div.theme_cont > div:nth-child(3) > div > ul > li:nth-child(2) > a.theme_info > strong
 </style>
 
 <script type="text/javascript">
@@ -33,9 +51,15 @@ div, span {
 	<div class="myClass">DIV class="myClass"</div>
 	<script type="text/javascript">
 		/********직계자식 > ***********/
-		
+		var nodeList1=document.querySelectorAll('body > span');
+		for (var i = 0; i < nodeList1.length; i++) {
+			nodeList1.item(i).style.border='3px double tomato';
+		}
 		/********자손모두  ***********/
-		
+		var nodeList2=document.querySelectorAll('body  span');
+		for (var i = 0; i < nodeList2.length; i++) {
+			nodeList2.item(i).style.backgroundColor='pink';
+		}
 	</script>
 </body>
 </html>
