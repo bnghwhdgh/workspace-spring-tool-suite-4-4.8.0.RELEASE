@@ -72,43 +72,46 @@ ul {
 			    </data>
 			</result>
 			*/
-			var countStr = xmlDocument
-							.getElementsByTagName('count')
-							.item(0)
-							.firstChild
-							.nodeValue;
-			if(countStr.trim()=='0'){
-				return;
-			}
-			var newsNodeList=
-				xmlDocument.getElementsByTagName('news');
-			var html="<ul>";
-			for (var i = 0; i < newsNodeList.length; i++) {
-				var newsE = newsNodeList.item(i);
-				//console.log("------>"+newsE.childElementCount);
+		     var countNodeList = xmlDocument.getElementsByTagName('count'); //getElements => nodeList가 반환된다.
+			 var countElement = countNodeList.item(0); 
+			 var countText = countElement.firstChild; // 하나밖에 없는 자식노드 값 찾기
+			 var countStr =countText.nodeValue;
+			 if(countStr.trim()==0){
+				 return;
+			 }
+			 var newsNodeList = xmlDocument.getElementsByTagName("news");
+			 var html="<ul>";
+			 for (var i = 0; i < newsNodeList.length; i++) {
+				 var newsElement = newsNodeList.item(i);
 				/*
-				<news>
-	               <title>참으로 수고 많으셨습니다</title>
-	               <company>연합뉴스</company>
-	               <date>2020. 3. 16 오전 11:24:31</date>
-			    </news>
+				//xmlDocument.getElementsByTagName("title");// 9개 title (XXXX)
+				var titleNodeList=newsElement.getElementsByTagName("title");//1개 title 
+				var titleElement =titleNodeList.item(0);
+				var titleText=titleElement.firstChild
+				var titleStr=titleText.nodeValue;
 				*/
-				var titleStr = newsE.getElementsByTagName('title')
-				               .item(0)
-				               .firstChild
-				               .nodeValue;
-				var companyStr = newsE.getElementsByTagName('company')
-				               .item(0)
-				               .firstChild
-				               .nodeValue;
-				var dateStr = newsE.getElementsByTagName('date')
-				               .item(0)
-				               .firstChild
-				               .nodeValue;
-				html+="<li>"+titleStr+"["+companyStr+"("+dateStr+")]XML</li>"
+				var titleStr=
+					newsElement.getElementsByTagName("title")
+					.item(0).firstChild.nodeValue;
+				var companyStr=
+					newsElement.getElementsByTagName("company")
+					.item(0).firstChild.nodeValue;
+				var dateStr=
+					newsElement.getElementsByTagName("date")
+					.item(0).firstChild.nodeValue;
+				//element를 바로 찾을 수 있는 방법은 없으니 이 과정을 외우자
+			     /*
+				 <news>
+			                <title>참으로 수고 많으셨습니다</title>
+			                <company>연합뉴스</company>
+			                <date>2020. 3. 16 오전 11:24:31</date>
+			     </news>
+				*/
+				html+="<li>"+titleStr+"["+companyStr+"("+dateStr+")]XML</li>";
 			}
 			html+="</ul>";
-			document.getElementById('newsDiv').innerHTML=html;
+			console.log(html);
+			document.querySelector("#newsDiv").innerHTML=html;
 		}
 	}
 	window.onload = function() {
